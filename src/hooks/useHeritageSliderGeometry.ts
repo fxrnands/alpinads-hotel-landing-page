@@ -32,6 +32,7 @@ export function useHeritageSliderGeometry(): InfiniteLoopSliderOptions {
         slideWidth: 748,
         slideHeight: 519,
         slideGap: 16,
+        translateOffset: 0,
       };
     }
 
