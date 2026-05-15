@@ -1,4 +1,5 @@
 import { Amenities } from "../components/Amenities";
+import { Faq } from "../components/Faq";
 import { Hero } from "../components/Hero";
 import { OurHeritage } from "../components/OurHeritage";
 import { VisualMemories } from "../components/VisualMemories";
@@ -12,6 +13,7 @@ export function LandingPage() {
       <YourPrivateSanctuary />
       <Amenities />
       <VisualMemories />
+      <Faq />
     </>
   );
 }

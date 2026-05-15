@@ -3,6 +3,7 @@ export const SECTION_IDS = {
   rooms: "rooms",
   amenities: "amenities",
   visualMemories: "visual-memories",
+  faq: "faq",
   reserve: "reserve",
   heritage: "heritage",
   booking: "booking",
