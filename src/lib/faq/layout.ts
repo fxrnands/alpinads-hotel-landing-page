@@ -8,7 +8,7 @@ export const FAQ_SECTION_PADDING_CLASS = "py-[80px] lg:py-[120px]" as const;
 export const FAQ_COLUMNS_GAP_CLASS = "gap-10 lg:gap-[80px]" as const;
 
 export const FAQ_TITLE_CLASS =
-  "text-center font-manrope text-[24px] font-normal leading-[140%] tracking-normal text-[#524A46] lg:text-left lg:text-[32px] lg:text-[#323232] xl:text-[40px]" as const;
+  "text-center font-manrope text-[24px] font-normal leading-[140%] tracking-normal text-[#524A46] md:text-left md:text-[32px] md:text-[#323232] xl:text-[40px]" as const;
 
 export const FAQ_DESCRIPTION_CLASS =
   "max-w-[640px] text-center font-manrope text-[16px] font-normal leading-[140%] tracking-normal text-[#524A46]/80 lg:max-w-none lg:text-left lg:leading-[150%] lg:tracking-[-0.01em] lg:text-[#323232]/80" as const;
