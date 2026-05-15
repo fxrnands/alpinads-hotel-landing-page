@@ -1,0 +1,1 @@
+export { getVisualMemoryTileAspectStyle } from "./tileStyle";
