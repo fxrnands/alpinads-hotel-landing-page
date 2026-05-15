@@ -30,12 +30,12 @@ export default defineConfig({
             return undefined;
           }
 
-          if (id.includes("react-dom") || /\/react\//.test(id)) {
+          if (
+            id.includes("react-dom") ||
+            /\/react\//.test(id) ||
+            id.includes("@radix-ui")
+          ) {
             return "react-vendor";
-          }
-
-          if (id.includes("@radix-ui")) {
-            return "radix-vendor";
           }
 
           if (id.includes("lucide-react")) {
