@@ -1,21 +1,14 @@
-import { Hero } from "./components/hero";
-import { About } from "./components/about";
-import { Rooms } from "./components/rooms";
-import { Amenities } from "./components/amenities";
-import { Reserve } from "./components/reserve";
-import { Footer } from "./components/footer";
 import { Toaster } from "./components/ui/sonner";
+import { MainLayout } from "./layouts/MainLayout";
+import { LandingPage } from "./pages/LandingPage";
 
 export default function App() {
   return (
-    <div className="min-h-screen w-full bg-background">
-      <Hero />
-      <About />
-      <Rooms />
-      <Amenities />
-      <Reserve />
-      <Footer />
+    <MainLayout>
+      <main className="flex-1" id="main-content">
+        <LandingPage />
+      </main>
       <Toaster />
-    </div>
+    </MainLayout>
   );
 }
