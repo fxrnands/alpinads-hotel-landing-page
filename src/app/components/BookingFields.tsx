@@ -7,7 +7,7 @@ import type { DateRange } from "react-day-picker";
 
 import {
   DATE_RANGE_POPOVER_CONTENT_CLASS,
-  useDateRangeCalendarLayout,
+  DateRangeCalendarResponsive,
 } from "@/lib/booking/dateRangePicker";
 
 import { Button } from "./ui/button";
@@ -147,8 +147,6 @@ export function DateRangeField({
   onChange: (range?: DateRange) => void;
   hero?: boolean;
 }) {
-  const { numberOfMonths, stretch } = useDateRangeCalendarLayout();
-
   const formatRange = () => {
     if (!dateRange?.from) {
       if (hero) {
@@ -189,23 +187,32 @@ export function DateRangeField({
           />
         </Button>
       </PopoverTrigger>
-      <PopoverContent
-        className={cn(
-          "p-0",
-          hero ? DATE_RANGE_POPOVER_CONTENT_CLASS : "w-auto",
-        )}
-        align="start"
-      >
-        <Calendar
-          mode="range"
-          selected={dateRange}
-          onSelect={onChange}
-          fromDate={new Date()}
-          numberOfMonths={hero ? numberOfMonths : 2}
-          stretch={hero ? stretch : false}
-          initialFocus
-        />
-      </PopoverContent>
+        <PopoverContent
+          className={cn(
+            "p-0",
+            hero ? DATE_RANGE_POPOVER_CONTENT_CLASS : "w-auto",
+          )}
+          align="start"
+        >
+          {hero ? (
+            <DateRangeCalendarResponsive
+              selected={dateRange}
+              onSelect={onChange}
+              fromDate={new Date()}
+              initialFocus
+            />
+          ) : (
+            <Calendar
+              mode="range"
+              selected={dateRange}
+              onSelect={onChange}
+              fromDate={new Date()}
+              numberOfMonths={2}
+              stretch={false}
+              initialFocus
+            />
+          )}
+        </PopoverContent>
     </Popover>
   );
 }

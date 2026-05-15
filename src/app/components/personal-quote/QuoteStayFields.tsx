@@ -11,11 +11,10 @@ import {
   SelectValue,
 } from "@/app/components/ui/select";
 import { Button } from "@/app/components/ui/button";
-import { Calendar } from "@/app/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/app/components/ui/popover";
 import {
   DATE_RANGE_POPOVER_CONTENT_CLASS,
-  useDateRangeCalendarLayout,
+  DateRangeCalendarResponsive,
 } from "@/lib/booking/dateRangePicker";
 import {
   PERSONAL_QUOTE_FIELD_ICONS,
@@ -58,7 +57,6 @@ type QuoteDateRangeFieldProps = {
 export function QuoteDateRangeField({ dateRange, onChange }: QuoteDateRangeFieldProps) {
   const selectedRange = toDateRange(dateRange);
   const hasSelection = Boolean(dateRange?.from);
-  const { numberOfMonths, stretch } = useDateRangeCalendarLayout();
 
   return (
     <Popover>
@@ -80,13 +78,10 @@ export function QuoteDateRangeField({ dateRange, onChange }: QuoteDateRangeField
         className={cn("p-0", DATE_RANGE_POPOVER_CONTENT_CLASS)}
         align="start"
       >
-        <Calendar
-          mode="range"
+        <DateRangeCalendarResponsive
           selected={selectedRange}
           onSelect={onChange}
           fromDate={new Date()}
-          numberOfMonths={numberOfMonths}
-          stretch={stretch}
           initialFocus
         />
       </PopoverContent>
