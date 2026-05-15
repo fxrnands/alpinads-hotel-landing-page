@@ -32,6 +32,10 @@ Thumbs.db
 .cache/
 .eslintcache
 .parcel-cache/
+*.tsbuildinfo
+
+# npm (project uses pnpm)
+package-lock.json
 
 # Coverage
 coverage/
