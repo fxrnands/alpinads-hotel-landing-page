@@ -1,2 +1,23 @@
 @import './tailwind.css';
 @import './theme.css';
+
+/* Lenis: native scroll-behavior must stay auto while smooth wheel is active */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Fallback when Lenis is off (e.g. prefers-reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.lenis) {
+    scroll-behavior: smooth;
+  }
+}
