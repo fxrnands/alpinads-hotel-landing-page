@@ -13,9 +13,14 @@ import { cn } from "./ui/utils";
 type SanctuaryRoomCardProps = {
   room: SanctuaryRoom;
   width?: number;
+  onSeeDetails?: (room: SanctuaryRoom) => void;
 };
 
-export function SanctuaryRoomCard({ room, width = SANCTUARY_CARD_WIDTH }: SanctuaryRoomCardProps) {
+export function SanctuaryRoomCard({
+  room,
+  width = SANCTUARY_CARD_WIDTH,
+  onSeeDetails,
+}: SanctuaryRoomCardProps) {
   const guestLabel = room.guests === 1 ? "1 Guest" : `${room.guests} Guests`;
   const imageHeight = sanctuaryImageHeightForWidth(width);
 
@@ -63,6 +68,7 @@ export function SanctuaryRoomCard({ room, width = SANCTUARY_CARD_WIDTH }: Sanctu
 
         <Button
           type="button"
+          onClick={() => onSeeDetails?.(room)}
           className="h-12 w-full min-w-0 shrink-0 rounded-[8px] border border-solid border-[#32323233] bg-transparent font-manrope text-[14px] font-normal uppercase leading-[150%] tracking-[5%] text-[#323232] hover:bg-[#323232]/5 md:mt-auto"
         >
           See Details

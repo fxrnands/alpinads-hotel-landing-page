@@ -8,6 +8,7 @@ type SanctuaryMobileCarouselProps = {
   slideWidth: number;
   activeIndex: number;
   direction: number;
+  onSeeDetails?: (room: SanctuaryRoom) => void;
 };
 
 const SLIDE_TRANSITION = { duration: 0.3, ease: [0.32, 0.72, 0, 1] as const };
@@ -29,6 +30,7 @@ export function SanctuaryMobileCarousel({
   slideWidth,
   activeIndex,
   direction,
+  onSeeDetails,
 }: SanctuaryMobileCarouselProps) {
   return (
     <div className="relative w-full overflow-hidden" aria-live="polite">
@@ -43,7 +45,7 @@ export function SanctuaryMobileCarousel({
           transition={SLIDE_TRANSITION}
           className="w-full"
         >
-          <SanctuaryRoomCard room={room} width={slideWidth} />
+          <SanctuaryRoomCard room={room} width={slideWidth} onSeeDetails={onSeeDetails} />
         </motion.div>
       </AnimatePresence>
     </div>

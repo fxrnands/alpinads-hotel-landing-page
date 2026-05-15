@@ -1,26 +1,49 @@
 import { useCallback, useState } from "react";
 
-import { SANCTUARY_ROOMS } from "@/constants/sanctuaryRooms";
+import { SANCTUARY_ROOMS, type SanctuaryRoom } from "@/constants/sanctuaryRooms";
 import { useBoundedSlider } from "@/hooks/useBoundedSlider";
-import { useMatchMedia } from "@/hooks/useMatchMedia";
+import useModal from "@/hooks/use-modal";
 import {
   useSanctuarySliderGeometry,
   useSanctuarySliderViewport,
 } from "@/hooks/useSanctuarySliderGeometry";
 import { SECTION_IDS } from "../sections";
+import { RoomDetailModal } from "./sanctuary/RoomDetailModal";
 import { SanctuaryMobileCarousel } from "./SanctuaryMobileCarousel";
 import { SanctuaryRoomCard } from "./SanctuaryRoomCard";
 import { SectionGalleryNav } from "./SectionGalleryNav";
 import { SectionIntro } from "./SectionIntro";
 import { cn } from "./ui/utils";
 
-const MD_BREAKPOINT_QUERY = "(min-width: 768px)";
+const ROOM_DETAIL_MODAL_ID = "roomDetail";
 
 export function YourPrivateSanctuary() {
-  const isDesktop = useMatchMedia(MD_BREAKPOINT_QUERY);
   const [slideDirection, setSlideDirection] = useState(0);
   const { viewportRef, containerWidth } = useSanctuarySliderViewport();
   const sliderOptions = useSanctuarySliderGeometry(containerWidth);
+  const { modalVisibility, openModal, closeModal } = useModal([ROOM_DETAIL_MODAL_ID]);
+  const [selectedRoom, setSelectedRoom] = useState<SanctuaryRoom | null>(null);
+
+  const openRoomDetail = useCallback(
+    (room: SanctuaryRoom) => {
+      setSelectedRoom(room);
+      openModal(ROOM_DETAIL_MODAL_ID);
+    },
+    [openModal],
+  );
+
+  const closeRoomDetail = useCallback(() => {
+    closeModal(ROOM_DETAIL_MODAL_ID);
+  }, [closeModal]);
+
+  const handleOpenChange = useCallback(
+    (next: boolean) => {
+      if (!next) closeRoomDetail();
+    },
+    [closeRoomDetail],
+  );
+
+  const isOpen = modalVisibility[ROOM_DETAIL_MODAL_ID] ?? false;
 
   const {
     activeIndex,
@@ -75,38 +98,46 @@ export function YourPrivateSanctuary() {
             className="w-full px-4 md:overflow-visible md:px-0 md:pl-8"
           >
             {isReady && activeRoom ? (
-              isDesktop ? (
-                <div
-                  className={cn(
-                    "flex w-max flex-nowrap will-change-transform",
-                    transitionOn ? "transition-transform duration-500 ease-out" : "",
-                  )}
-                  style={{
-                    transform: `translate3d(-${translatePx}px, 0, 0)`,
-                    gap: slideGap,
-                  }}
-                  role="list"
-                  aria-label="Suite gallery"
-                >
-                  {SANCTUARY_ROOMS.map((room) => (
-                    <div
-                      key={room.id}
-                      role="listitem"
-                      className="shrink-0"
-                      style={{ width: slideWidth }}
-                    >
-                      <SanctuaryRoomCard room={room} width={slideWidth} />
-                    </div>
-                  ))}
+              <>
+                <div className="hidden md:block">
+                  <div
+                    className={cn(
+                      "flex w-max flex-nowrap will-change-transform",
+                      transitionOn ? "transition-transform duration-500 ease-out" : "",
+                    )}
+                    style={{
+                      transform: `translate3d(-${translatePx}px, 0, 0)`,
+                      gap: slideGap,
+                    }}
+                    role="list"
+                    aria-label="Suite gallery"
+                  >
+                    {SANCTUARY_ROOMS.map((room) => (
+                      <div
+                        key={room.id}
+                        role="listitem"
+                        className="shrink-0"
+                        style={{ width: slideWidth }}
+                      >
+                        <SanctuaryRoomCard
+                          room={room}
+                          width={slideWidth}
+                          onSeeDetails={openRoomDetail}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ) : (
-                <SanctuaryMobileCarousel
-                  room={activeRoom}
-                  slideWidth={slideWidth}
-                  activeIndex={activeIndex}
-                  direction={slideDirection}
-                />
-              )
+                <div className="md:hidden">
+                  <SanctuaryMobileCarousel
+                    room={activeRoom}
+                    slideWidth={slideWidth}
+                    activeIndex={activeIndex}
+                    direction={slideDirection}
+                    onSeeDetails={openRoomDetail}
+                  />
+                </div>
+              </>
             ) : null}
           </div>
         </div>
@@ -121,6 +152,13 @@ export function YourPrivateSanctuary() {
           className="flex justify-center"
         />
       </div>
+
+      <RoomDetailModal
+        room={selectedRoom}
+        open={isOpen}
+        onClose={closeRoomDetail}
+        onOpenChange={handleOpenChange}
+      />
     </section>
   );
 }

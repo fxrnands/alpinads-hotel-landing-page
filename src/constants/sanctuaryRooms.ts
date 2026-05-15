@@ -1,3 +1,8 @@
+export type RoomAmenityItem = {
+  id: string;
+  label: string;
+};
+
 export type SanctuaryRoom = {
   id: string;
   title: string;
@@ -6,6 +11,15 @@ export type SanctuaryRoom = {
   guests: number;
   areaSqm: number;
   imageUrl: string;
+  /** Long copy for the room detail modal; falls back to `description`. */
+  longDescription?: string;
+  /** Extra images for the modal carousel; falls back to `[imageUrl]`. */
+  galleryImageUrls?: string[];
+  bedType?: string;
+  /** e.g. "2 - 4 Guests"; defaults from `guests`. */
+  guestDisplayLabel?: string;
+  amenities?: RoomAmenityItem[];
+  includedServices?: string[];
 };
 
 export const SANCTUARY_ROOMS: SanctuaryRoom[] = [
@@ -23,11 +37,30 @@ export const SANCTUARY_ROOMS: SanctuaryRoom[] = [
     id: "summit-royal-suite",
     title: "Summit Royal Suite",
     description: "Floor-to-ceiling windows framing the valley with a soaking tub.",
+    longDescription:
+      "Experience the pinnacle of Alpine luxury. Located on the highest floor of Hotel L'Aura, the Summit Royal Suite offers an expansive living area with a private open fireplace and a freestanding designer bathtub with direct views of the Dolomites. The suite is furnished with hand-carved stone and local Swiss pine wood, known for its calming properties.",
     priceLabel: "€340 / night",
     guests: 2,
     areaSqm: 52,
+    bedType: "King Size Luxury Bed",
+    guestDisplayLabel: "2 - 4 Guests",
     imageUrl:
       "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80",
+    galleryImageUrls: [
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=80",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80",
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&q=80",
+    ],
+    amenities: [
+      { id: "bathtub", label: "Bathtub" },
+      { id: "wifi", label: "Wifi" },
+      { id: "mini-bar", label: "Mini Bar" },
+    ],
+    includedServices: [
+      "Complimentary bottle of South Tyrolean sparkling wine upon arrival.",
+      "Reserved parking space in our underground garage.",
+      "Daily 'Gourmet Breakfast' served in the suite upon request.",
+    ],
   },
   {
     id: "family-alpine-lodge",
