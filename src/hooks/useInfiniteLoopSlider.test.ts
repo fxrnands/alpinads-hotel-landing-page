@@ -23,6 +23,19 @@ describe("useInfiniteLoopSlider", () => {
     expect(result.current.translatePx).toBe(330);
   });
 
+  it("applies translateOffset on top of base translate", () => {
+    const slides = ["a", "b"] as const;
+    const { result } = renderHook(() =>
+      useInfiniteLoopSlider(slides, {
+        slideWidth: 100,
+        slideHeight: 50,
+        slideGap: 10,
+        translateOffset: 30,
+      }),
+    );
+    expect(result.current.translatePx).toBe(250);
+  });
+
   it("centers the active slide when centerInViewportWidth is set", () => {
     const slides = ["a", "b"] as const;
     const { result } = renderHook(() =>

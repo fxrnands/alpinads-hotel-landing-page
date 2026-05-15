@@ -12,6 +12,8 @@ export type InfiniteLoopSliderOptions = {
    * in this viewport width (peek of neighbors on both sides).
    */
   centerInViewportWidth?: number;
+  /** Extra translate (px) to tuck the track left and reduce the previous-slide peek. */
+  translateOffset?: number;
 };
 
 export function useInfiniteLoopSlider(
@@ -21,6 +23,7 @@ export function useInfiniteLoopSlider(
     slideHeight = 519,
     slideGap = 16,
     centerInViewportWidth,
+    translateOffset = 0,
   }: InfiniteLoopSliderOptions = {},
 ) {
   const baseLen = slides.length;
@@ -62,7 +65,7 @@ export function useInfiniteLoopSlider(
       return;
     }
     setTrackIndex(baseLen);
-  }, [slideWidth, slideHeight, slideGap, centerInViewportWidth, baseLen]);
+  }, [slideWidth, slideHeight, slideGap, centerInViewportWidth, translateOffset, baseLen]);
 
   const scheduleResumeTransition = useCallback(() => {
     if (resumeTransitionRafRef.current !== null) {
@@ -121,9 +124,9 @@ export function useInfiniteLoopSlider(
   }, [stepTrackIndex]);
 
   const translatePx =
-    centerInViewportWidth != null && centerInViewportWidth > 0
+    (centerInViewportWidth != null && centerInViewportWidth > 0
       ? trackIndex * slideSpan + slideWidth / 2 - centerInViewportWidth / 2
-      : trackIndex * slideSpan;
+      : trackIndex * slideSpan) + translateOffset;
 
   return {
     loopSlides,
