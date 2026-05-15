@@ -62,7 +62,7 @@ export function YourPrivateSanctuary() {
         />
       </div>
 
-      <div className="mt-0 flex flex-col gap-[24px] md:gap-6">
+      <div className="mt-0 flex flex-col gap-[24px] md:gap-10">
         <div
           className={cn(
             "w-full overflow-x-clip",

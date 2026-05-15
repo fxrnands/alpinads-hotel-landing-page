@@ -1,19 +1,45 @@
-import { Amenities } from "../components/Amenities";
-import { Faq } from "../components/Faq";
+import { lazy } from "react";
+
 import { Hero } from "../components/Hero";
-import { OurHeritage } from "../components/OurHeritage";
-import { VisualMemories } from "../components/VisualMemories";
-import { YourPrivateSanctuary } from "../components/YourPrivateSanctuary";
+import { SectionSuspense } from "../components/SectionSuspense";
+
+const OurHeritage = lazy(() =>
+  import("../components/OurHeritage").then((module) => ({ default: module.OurHeritage })),
+);
+const YourPrivateSanctuary = lazy(() =>
+  import("../components/YourPrivateSanctuary").then((module) => ({
+    default: module.YourPrivateSanctuary,
+  })),
+);
+const Amenities = lazy(() =>
+  import("../components/Amenities").then((module) => ({ default: module.Amenities })),
+);
+const VisualMemories = lazy(() =>
+  import("../components/VisualMemories").then((module) => ({ default: module.VisualMemories })),
+);
+const Faq = lazy(() =>
+  import("../components/Faq").then((module) => ({ default: module.Faq })),
+);
 
 export function LandingPage() {
   return (
     <>
       <Hero />
-      <OurHeritage />
-      <YourPrivateSanctuary />
-      <Amenities />
-      <VisualMemories />
-      <Faq />
+      <SectionSuspense minHeight="70vh">
+        <OurHeritage />
+      </SectionSuspense>
+      <SectionSuspense minHeight="80vh">
+        <YourPrivateSanctuary />
+      </SectionSuspense>
+      <SectionSuspense minHeight="60vh">
+        <Amenities />
+      </SectionSuspense>
+      <SectionSuspense minHeight="70vh">
+        <VisualMemories />
+      </SectionSuspense>
+      <SectionSuspense minHeight="50vh">
+        <Faq />
+      </SectionSuspense>
     </>
   );
 }

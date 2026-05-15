@@ -1,24 +1,74 @@
-import path from 'path'
-import { defineConfig } from 'vitest/config'
-import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/plugin-react'
+/// <reference types="node" />
+
+import path from "path";
+import { fileURLToPath } from "url";
+import { defineConfig } from "vitest/config";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+
+const rootDir = path.dirname(fileURLToPath(import.meta.url));
+
+function isNodeModule(id: string): boolean {
+  return id.includes("node_modules");
+}
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      // Alias @ to the src directory
-      '@': path.resolve(__dirname, './src'),
+      "@": path.resolve(rootDir, "src"),
     },
   },
 
-  // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
-  assetsInclude: ['**/*.svg', '**/*.csv'],
+  assetsInclude: ["**/*.svg", "**/*.csv"],
+
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (!isNodeModule(id)) {
+            return undefined;
+          }
+
+          if (id.includes("react-dom") || /\/react\//.test(id)) {
+            return "react-vendor";
+          }
+
+          if (id.includes("@radix-ui")) {
+            return "radix-vendor";
+          }
+
+          if (id.includes("lucide-react")) {
+            return "icons-vendor";
+          }
+
+          if (id.includes("date-fns") || id.includes("react-day-picker")) {
+            return "date-vendor";
+          }
+
+          if (id.includes("embla-carousel")) {
+            return "carousel-vendor";
+          }
+
+          if (id.includes("lenis")) {
+            return "scroll-vendor";
+          }
+
+          if (id.includes("motion")) {
+            return "motion-vendor";
+          }
+
+          return undefined;
+        },
+      },
+    },
+    chunkSizeWarningLimit: 400,
+  },
 
   test: {
-    environment: 'jsdom',
-    setupFiles: ['./src/test/setup.ts'],
+    environment: "jsdom",
+    setupFiles: ["./src/test/setup.ts"],
     css: true,
     clearMocks: true,
   },
-})
+});
