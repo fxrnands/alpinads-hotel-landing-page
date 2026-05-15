@@ -1,12 +1,35 @@
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, CalendarDays, ChevronDown, Minus, Plus, Users } from "lucide-react";
+import { Calendar as CalendarIcon, ChevronDown, Minus, Plus, Users } from "lucide-react";
+
+import { FORM_FIELD_ICONS } from "@/constants/formFieldIcons";
 import type { ReactNode } from "react";
 import type { DateRange } from "react-day-picker";
+
+import {
+  DATE_RANGE_POPOVER_CONTENT_CLASS,
+  useDateRangeCalendarLayout,
+} from "@/lib/booking/dateRangePicker";
 
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "./ui/utils";
+
+const HERO_BOOKING_FIELD_ICON_CLASS =
+  "size-6 shrink-0 object-contain brightness-0 invert";
+
+function HeroBookingFieldIcon({ src }: { src: string }) {
+  return (
+    <img
+      src={src}
+      alt=""
+      width={24}
+      height={24}
+      className={HERO_BOOKING_FIELD_ICON_CLASS}
+      aria-hidden
+    />
+  );
+}
 
 type FieldShellProps = {
   label: string;
@@ -94,13 +117,13 @@ export function DateField({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button type="button" className="block w-full">
+        <Button type="button" className="block h-auto w-full p-0 text-left">
           <FieldShell
             label={label}
             icon={<CalendarIcon className="h-4 w-4" />}
             value={date ? format(date, "EEE, MMM d") : <span className="opacity-60">Select date</span>}
           />
-        </button>
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
@@ -124,6 +147,8 @@ export function DateRangeField({
   onChange: (range?: DateRange) => void;
   hero?: boolean;
 }) {
+  const { numberOfMonths, stretch } = useDateRangeCalendarLayout();
+
   const formatRange = () => {
     if (!dateRange?.from) {
       if (hero) {
@@ -140,9 +165,10 @@ export function DateRangeField({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button
+        <Button
           type="button"
           className={cn(
+            "h-auto p-0 text-left",
             hero
               ? "flex h-[70px] min-h-[70px] w-full min-w-0 items-stretch md:h-full md:min-h-0 md:flex-1 md:basis-0"
               : "block w-full",
@@ -152,7 +178,7 @@ export function DateRangeField({
             label={hero ? "Arrival & departure" : "Check-in – Check-out"}
             icon={
               hero ? (
-                <CalendarDays className="size-6" strokeWidth={1.75} aria-hidden />
+                <HeroBookingFieldIcon src={FORM_FIELD_ICONS.calendar} />
               ) : (
                 <CalendarIcon className="h-4 w-4" aria-hidden />
               )
@@ -161,15 +187,22 @@ export function DateRangeField({
             showChevron={hero}
             value={formatRange()}
           />
-        </button>
+        </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent
+        className={cn(
+          "p-0",
+          hero ? DATE_RANGE_POPOVER_CONTENT_CLASS : "w-auto",
+        )}
+        align="start"
+      >
         <Calendar
           mode="range"
           selected={dateRange}
           onSelect={onChange}
           fromDate={new Date()}
-          numberOfMonths={2}
+          numberOfMonths={hero ? numberOfMonths : 2}
+          stretch={hero ? stretch : false}
           initialFocus
         />
       </PopoverContent>
@@ -195,9 +228,10 @@ export function GuestsField({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button
+        <Button
           type="button"
           className={cn(
+            "h-auto p-0 text-left",
             hero
               ? "flex h-[70px] min-h-[70px] w-full min-w-0 items-stretch md:h-full md:min-h-0 md:flex-1 md:basis-0"
               : "block w-full",
@@ -205,14 +239,26 @@ export function GuestsField({
         >
           <FieldShell
             label="Guests"
-            icon={<Users className={hero ? "size-6" : "h-4 w-4"} />}
+            icon={
+              hero ? (
+                <HeroBookingFieldIcon src={FORM_FIELD_ICONS.users} />
+              ) : (
+                <Users className="h-4 w-4" aria-hidden />
+              )
+            }
             appearance={hero ? "bar" : "pill"}
             showChevron={hero}
             value={displayValue}
           />
-        </button>
+        </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-72 p-4" align="start">
+      <PopoverContent
+        className={cn(
+          "p-4",
+          hero ? cn(DATE_RANGE_POPOVER_CONTENT_CLASS, "md:w-72") : "w-72",
+        )}
+        align="start"
+      >
         <Stepper
           label="Adults"
           sublabel="Ages 13+"
@@ -261,24 +307,20 @@ function Stepper({
       <div className="flex items-center gap-3">
         <Button
           type="button"
-          variant="outline"
-          size="icon"
-          className="h-8 w-8 rounded-full"
+          appearance="iconControl"
           disabled={value <= min}
           onClick={() => onChange(value - 1)}
         >
-          <Minus className="h-4 w-4" />
+          <Minus className="size-4" />
         </Button>
         <span className="w-5 text-center tabular-nums">{value}</span>
         <Button
           type="button"
-          variant="outline"
-          size="icon"
-          className="h-8 w-8 rounded-full"
+          appearance="iconControl"
           disabled={value >= max}
           onClick={() => onChange(value + 1)}
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="size-4" />
         </Button>
       </div>
     </div>
