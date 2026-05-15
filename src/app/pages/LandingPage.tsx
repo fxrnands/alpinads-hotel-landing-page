@@ -1,5 +1,6 @@
 import { lazy } from "react";
 
+import { Footer } from "../components/Footer";
 import { Hero } from "../components/Hero";
 import { SectionSuspense } from "../components/SectionSuspense";
 
@@ -19,6 +20,9 @@ const VisualMemories = lazy(() =>
 );
 const Faq = lazy(() =>
   import("../components/Faq").then((module) => ({ default: module.Faq })),
+);
+const PersonalQuote = lazy(() =>
+  import("../components/PersonalQuote").then((module) => ({ default: module.PersonalQuote })),
 );
 
 export function LandingPage() {
@@ -40,6 +44,10 @@ export function LandingPage() {
       <SectionSuspense minHeight="50vh">
         <Faq />
       </SectionSuspense>
+      <SectionSuspense minHeight="80vh">
+        <PersonalQuote />
+      </SectionSuspense>
+      <Footer />
     </>
   );
 }
