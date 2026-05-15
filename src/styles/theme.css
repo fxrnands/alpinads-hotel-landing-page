@@ -118,6 +118,8 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --font-manrope: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-montserrat: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-general-sans: "General Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
