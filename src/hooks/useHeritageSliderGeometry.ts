@@ -1,20 +1,20 @@
 import { useLayoutEffect, useMemo, useState } from "react";
 
 import type { InfiniteLoopSliderOptions } from "./useInfiniteLoopSlider";
-import { useMatchMedia } from "./useMatchMedia";
 
-const MD_BREAKPOINT_QUERY = "(min-width: 768px)";
+/** Matches Tailwind `md` (48rem at 16px root). Not used for CSS—slider math needs a px threshold. */
+const MD_MIN_PX = 768;
 
 export function useHeritageSliderGeometry(): InfiniteLoopSliderOptions {
-  const isDesktop = useMatchMedia(MD_BREAKPOINT_QUERY);
-  const [mobileViewportWidth, setMobileViewportWidth] = useState(390);
+  const [viewportWidth, setViewportWidth] = useState(() =>
+    typeof window !== "undefined"
+      ? Math.round(window.visualViewport?.width ?? window.innerWidth)
+      : 0,
+  );
 
   useLayoutEffect(() => {
-    if (isDesktop) return;
-
     const measure = () => {
-      const vw = window.visualViewport?.width ?? window.innerWidth;
-      setMobileViewportWidth(Math.round(vw));
+      setViewportWidth(Math.round(window.visualViewport?.width ?? window.innerWidth));
     };
 
     measure();
@@ -24,10 +24,12 @@ export function useHeritageSliderGeometry(): InfiniteLoopSliderOptions {
       window.removeEventListener("resize", measure);
       window.visualViewport?.removeEventListener("resize", measure);
     };
-  }, [isDesktop]);
+  }, []);
 
   return useMemo(() => {
-    if (isDesktop) {
+    const isMdUp = viewportWidth >= MD_MIN_PX;
+
+    if (isMdUp) {
       return {
         slideWidth: 748,
         slideHeight: 519,
@@ -36,7 +38,7 @@ export function useHeritageSliderGeometry(): InfiniteLoopSliderOptions {
       };
     }
 
-    const vw = mobileViewportWidth;
+    const vw = viewportWidth > 0 ? viewportWidth : 390;
     const slideGap = 12;
     const slideSide = Math.round(Math.max(240, Math.min(vw * 0.82, vw - 24)));
 
@@ -46,5 +48,5 @@ export function useHeritageSliderGeometry(): InfiniteLoopSliderOptions {
       slideGap,
       centerInViewportWidth: vw,
     };
-  }, [isDesktop, mobileViewportWidth]);
+  }, [viewportWidth]);
 }

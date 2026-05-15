@@ -5,18 +5,19 @@ import {
   SANCTUARY_DESKTOP_CARD_WIDTH,
 } from "@/constants/sanctuaryCard";
 import type { InfiniteLoopSliderOptions } from "./useInfiniteLoopSlider";
-import { useMatchMedia } from "./useMatchMedia";
 
-const MD_BREAKPOINT_QUERY = "(min-width: 768px)";
+/** Matches Tailwind `md` (48rem at 16px root). Not used for CSS—slider math needs a px threshold. */
+const MD_MIN_PX = 768;
+
 const DESKTOP_SLIDE_GAP = 16;
 
 export function useSanctuarySliderGeometry(
   containerWidth: number,
 ): InfiniteLoopSliderOptions {
-  const isDesktop = useMatchMedia(MD_BREAKPOINT_QUERY);
+  const isMdUp = containerWidth >= MD_MIN_PX;
 
   return useMemo(() => {
-    if (isDesktop) {
+    if (isMdUp) {
       return {
         slideWidth: SANCTUARY_DESKTOP_CARD_WIDTH,
         slideHeight: SANCTUARY_DESKTOP_CARD_HEIGHT,
@@ -29,7 +30,7 @@ export function useSanctuarySliderGeometry(
       slideHeight: 1,
       slideGap: 0,
     };
-  }, [isDesktop, containerWidth]);
+  }, [isMdUp, containerWidth]);
 }
 
 export function useSanctuarySliderViewport() {

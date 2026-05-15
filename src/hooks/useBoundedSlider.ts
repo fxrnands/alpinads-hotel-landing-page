@@ -15,7 +15,7 @@ export function useBoundedSlider(
   const maxIndex = Math.max(0, slideCount - 1);
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [transitionOn, setTransitionOn] = useState(true);
+  const transitionOn = true;
 
   useEffect(() => {
     setActiveIndex((index) => Math.min(index, maxIndex));

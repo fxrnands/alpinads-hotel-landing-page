@@ -74,7 +74,7 @@ Workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
 ## Path aliases
 
-TypeScript and Vite resolve `@/*` to `src/*` (for example `@/hooks/useMatchMedia`).
+TypeScript and Vite resolve `@/*` to `src/*` (for example `@/constants/sanctuaryRooms`).
 
 ## License
 
