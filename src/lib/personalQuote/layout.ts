@@ -8,7 +8,7 @@ export const PERSONAL_QUOTE_EYEBROW_CLASS =
   "font-manrope text-[14px] font-normal leading-[150%] tracking-normal text-white/90" as const;
 
 export const PERSONAL_QUOTE_TITLE_CLASS =
-  "mt-4 font-manrope text-[24px] font-normal leading-[140%] tracking-normal text-white" as const;
+  "mt-4 font-manrope text-[24px] font-normal leading-[140%] tracking-normal text-white md:text-[40px]" as const;
 
 export const PERSONAL_QUOTE_TEXTAREA_CLASS =
   "min-h-[120px] resize-none rounded-[8px] border border-[#3232321A] bg-[#FAFAFA] px-4 py-3 font-manrope text-[16px] leading-[150%] text-[#323232] placeholder:text-[#323232]/40 shadow-none focus-visible:ring-[#A49781]/30" as const;
