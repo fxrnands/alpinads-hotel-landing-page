@@ -63,7 +63,6 @@ export function SanctuaryRoomCard({ room, width = SANCTUARY_CARD_WIDTH }: Sanctu
 
         <Button
           type="button"
-          variant="outline"
           className="h-12 w-full min-w-0 shrink-0 rounded-[8px] border border-solid border-[#32323233] bg-transparent font-manrope text-[14px] font-normal uppercase leading-[150%] tracking-[5%] text-[#323232] hover:bg-[#323232]/5 md:mt-auto"
         >
           See Details

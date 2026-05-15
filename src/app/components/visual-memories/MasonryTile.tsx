@@ -2,6 +2,7 @@ import type { VisualMemoryImage } from "@/constants/visualMemories";
 import type { VisualMemoryMobileMetrics } from "@/lib/visualMemories";
 import { getVisualMemoryTileAspectStyle } from "@/utils/visualMemories";
 
+import { Button } from "../ui/button";
 import { cn } from "../ui/utils";
 import { MasonryImage } from "./MasonryImage";
 import { MasonrySeeAllOverlay } from "./MasonrySeeAllOverlay";
@@ -27,10 +28,10 @@ export function MasonryTile({
 
   if (image.area === "seeAll" || seeAllOverlay) {
     return (
-      <button
+      <Button
         type="button"
         className={cn(
-          "group relative block w-full min-w-0 overflow-hidden",
+          "group relative block h-auto w-full min-w-0 overflow-hidden rounded-none p-0",
           aspectClass,
         )}
         style={tileStyle}
@@ -38,7 +39,7 @@ export function MasonryTile({
       >
         <MasonryImage image={image} alt={seeAllOverlay ? "" : undefined} />
         <MasonrySeeAllOverlay />
-      </button>
+      </Button>
     );
   }
 

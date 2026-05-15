@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
+import { Button } from "./ui/button";
 import { cn } from "./ui/utils";
 
 type SectionGalleryNavProps = {
@@ -34,7 +35,7 @@ export function SectionGalleryNav({
 }: SectionGalleryNavProps) {
   return (
     <div className={cn("flex shrink-0 gap-2", className)}>
-      <button
+      <Button
         type="button"
         disabled={!canGoPrev}
         className={navButtonClass(canGoPrev)}
@@ -42,8 +43,8 @@ export function SectionGalleryNav({
         onClick={onPrev}
       >
         <ArrowLeft className="size-[18px]" strokeWidth={1.75} aria-hidden />
-      </button>
-      <button
+      </Button>
+      <Button
         type="button"
         disabled={!canGoNext}
         className={navButtonClass(canGoNext)}
@@ -51,7 +52,7 @@ export function SectionGalleryNav({
         onClick={onNext}
       >
         <ArrowRight className="size-[18px]" strokeWidth={1.75} aria-hidden />
-      </button>
+      </Button>
     </div>
   );
 }

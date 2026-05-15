@@ -1,5 +1,7 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+
+import { Button } from "./ui/button";
 import { useCallback } from "react";
 
 const UNSPLASH_SLIDES = [
@@ -41,22 +43,22 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      <button
+      <Button
         type="button"
         onClick={scrollPrev}
-        className="pointer-events-auto absolute left-3 md:left-6 top-1/2 z-[6] flex size-[36px] -translate-y-1/2 items-center justify-center rounded-none bg-[#00000033] text-white opacity-50 backdrop-blur-[111.1111068725586px] transition-opacity hover:opacity-90"
+        className="pointer-events-auto absolute left-3 top-1/2 z-[6] flex size-[36px] -translate-y-1/2 items-center justify-center rounded-none bg-[#00000033] p-0 text-white opacity-50 backdrop-blur-[111.1111068725586px] transition-opacity hover:bg-[#00000033] hover:opacity-90 md:left-6"
         aria-label="Previous slide"
       >
         <ArrowLeft className="size-[14px]" strokeWidth={2} aria-hidden />
-      </button>
-      <button
+      </Button>
+      <Button
         type="button"
         onClick={scrollNext}
-        className="pointer-events-auto absolute right-3 md:right-6 top-1/2 z-[6] flex size-[36px] -translate-y-1/2 items-center justify-center rounded-none bg-[#00000033] text-white backdrop-blur-[111.1111068725586px] transition-opacity hover:opacity-90"
+        className="pointer-events-auto absolute right-3 top-1/2 z-[6] flex size-[36px] -translate-y-1/2 items-center justify-center rounded-none bg-[#00000033] p-0 text-white backdrop-blur-[111.1111068725586px] transition-opacity hover:bg-[#00000033] hover:opacity-90 md:right-6"
         aria-label="Next slide"
       >
         <ArrowRight className="size-[14px]" strokeWidth={2} aria-hidden />
-      </button>
+      </Button>
     </div>
   );
 }
