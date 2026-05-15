@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 
+import { scrollToElementId } from "@/utils/smoothScroll";
+
 import { SECTION_IDS } from "../sections";
 import { DateRangeField, GuestsField, type Guests } from "./BookingFields";
 import { HeroCarousel } from "./HeroCarousel";
@@ -27,7 +29,7 @@ export function Hero() {
             id={SECTION_IDS.booking}
             onSubmit={(e) => {
               e.preventDefault();
-              document.getElementById(SECTION_IDS.heritage)?.scrollIntoView({ behavior: "smooth" });
+              scrollToElementId(SECTION_IDS.heritage);
             }}
             className="flex w-full flex-col gap-2 overflow-hidden rounded-[12px] border border-white/10 bg-black/25 p-0 text-white backdrop-blur-[100px] md:h-[72px] md:min-h-0 md:flex-row md:items-stretch md:gap-3 md:rounded-[8px]"
           >

@@ -1,1 +1,1 @@
-export { SECTION_IDS, sectionHref, type SectionId } from "./section-ids";
+export { SECTION_IDS, type SectionId } from "./section-ids";

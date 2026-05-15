@@ -1,7 +1,7 @@
-import { SECTION_IDS, sectionHref } from "@/app/sections";
+import { SECTION_IDS, type SectionId } from "@/app/sections";
 
 export const MAIN_NAV_LINKS = [
-  { label: "Rooms", href: sectionHref(SECTION_IDS.rooms) },
-  { label: "Amenities", href: sectionHref(SECTION_IDS.amenities) },
-  { label: "Reserve", href: sectionHref(SECTION_IDS.reserve) },
-] as const;
+  { label: "Rooms", sectionId: SECTION_IDS.rooms },
+  { label: "Amenities", sectionId: SECTION_IDS.amenities },
+  { label: "Reserve", sectionId: SECTION_IDS.reserve },
+] as const satisfies ReadonlyArray<{ label: string; sectionId: SectionId }>;
