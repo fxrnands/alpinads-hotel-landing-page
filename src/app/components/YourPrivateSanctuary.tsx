@@ -50,7 +50,7 @@ export function YourPrivateSanctuary() {
   return (
     <section
       id={SECTION_IDS.rooms}
-      className="w-full overflow-x-hidden bg-[#F4F3F0] py-[80px]"
+      className="w-full overflow-x-hidden bg-[#F4F3F0] py-[80px] md:py-[88px]"
     >
       <div className="mx-auto max-w-[1920px] px-4 md:px-8">
         <SectionIntro

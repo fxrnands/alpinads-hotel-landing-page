@@ -1,6 +1,9 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 
-import { SANCTUARY_CARD_HEIGHT, SANCTUARY_CARD_WIDTH } from "@/constants/sanctuaryCard";
+import {
+  SANCTUARY_DESKTOP_CARD_HEIGHT,
+  SANCTUARY_DESKTOP_CARD_WIDTH,
+} from "@/constants/sanctuaryCard";
 import type { InfiniteLoopSliderOptions } from "./useInfiniteLoopSlider";
 import { useMatchMedia } from "./useMatchMedia";
 
@@ -15,8 +18,8 @@ export function useSanctuarySliderGeometry(
   return useMemo(() => {
     if (isDesktop) {
       return {
-        slideWidth: SANCTUARY_CARD_WIDTH,
-        slideHeight: SANCTUARY_CARD_HEIGHT,
+        slideWidth: SANCTUARY_DESKTOP_CARD_WIDTH,
+        slideHeight: SANCTUARY_DESKTOP_CARD_HEIGHT,
         slideGap: DESKTOP_SLIDE_GAP,
       };
     }
