@@ -1,12 +1,6 @@
 # AlpinAds Hotel Landing Page
 
-A responsive marketing landing page for a luxury Alpine hotel brand. Built with React and Vite, aligned to mobile-first Figma specs for the hero booking experience and the Our Heritage gallery.
-
-## Features
-
-- **Hero** — Full-viewport image carousel (Embla), sticky navbar with responsive logos, and a booking bar with date range and guest pickers (mobile stack + desktop horizontal layout, backdrop blur, field reordering on small screens).
-- **Our Heritage** — Typography and spacing tuned for mobile/desktop, infinite-loop image gallery with centered slides and side peek on mobile, gallery navigation with reduced-opacity previous control.
-- **Shared UI** — Radix-based primitives, Tailwind CSS v4, Manrope typography, and accessible form controls.
+A single-page marketing site for a luxury Alpine hotel brand. The UI is implemented in React from Figma specs: hero with booking bar, heritage gallery, room showcase, amenities, visual memories masonry, and FAQ — all on one scrollable route with no client-side routing.
 
 ## Tech stack
 
@@ -16,58 +10,54 @@ A responsive marketing landing page for a luxury Alpine hotel brand. Built with 
 | Build | Vite 6 |
 | Styling | Tailwind CSS 4, `tailwind-merge`, CVA |
 | Components | Radix UI, Lucide icons |
-| Carousel | Embla Carousel React |
+| Carousel / motion | Embla Carousel, Motion (mobile carousels) |
+| Smooth scroll | Lenis (dynamic import) |
 | Dates | `react-day-picker`, `date-fns` |
 | Tests | Vitest, Testing Library, jsdom |
+| Package manager | pnpm 9 (`packageManager` in `package.json`) |
 
 ## Project structure
 
 ```
 src/
 ├── app/
-│   ├── components/     # Hero, Navbar, OurHeritage, BookingFields, UI primitives
-│   ├── layouts/        # MainLayout
-│   ├── pages/          # LandingPage
-│   └── sections/       # Section id constants
-├── constants/          # Nav links, heritage slide URLs
-├── hooks/              # Infinite loop slider, match media, heritage geometry
-├── styles/             # Global CSS and theme tokens
-└── test/               # Vitest setup
+│   ├── components/       # Section UI (Hero, Navbar, Amenities, FAQ, …)
+│   │   ├── faq/
+│   │   ├── visual-memories/
+│   │   └── ui/             # Shared primitives (shadcn-style)
+│   ├── layouts/            # MainLayout
+│   ├── pages/              # LandingPage (lazy-loaded sections)
+│   └── sections/           # Section id constants
+├── constants/              # Content and layout tokens per section
+├── hooks/                  # Sliders, smooth scroll, masonry, match media
+├── lib/                    # Section scroll targets, FAQ/visual-memories layout
+├── utils/                  # Smooth scroll helpers, motion preference
+└── test/                   # Vitest setup
 ```
 
 ## Requirements
 
 - **Node.js** 20+ (CI uses 22)
-- **pnpm** recommended (`pnpm-lock.yaml` is checked in; CI uses `npm ci` with `package-lock.json`)
+- **pnpm** 9.15.9 (enforced via `packageManager`; use Corepack or install pnpm globally)
 
 ## Getting started
 
 ```bash
-# Install dependencies
 pnpm install
-
-# Start dev server
 pnpm run dev
-
-# Typecheck
-pnpm run typecheck
-
-# Run tests
-pnpm run test
-
-# Production build
-pnpm run build
 ```
 
-The dev server URL is printed in the terminal (typically `http://localhost:5173`).
+Dev server URL is printed in the terminal (typically `http://localhost:5173`).
+
+Navigation uses in-page scroll only — the URL stays at `/` (no hash or path segments).
 
 ## Scripts
 
 | Script | Description |
 | --- | --- |
 | `pnpm run dev` | Start Vite dev server |
-| `pnpm run build` | Production build to `dist/` |
-| `pnpm run typecheck` | Run `tsc --noEmit` |
+| `pnpm run build` | Production build to `dist/` (vendor code-splitting enabled) |
+| `pnpm run typecheck` | Typecheck app + `vite.config.ts` (`tsc -b`) |
 | `pnpm run test` | Run Vitest once |
 | `pnpm run test:watch` | Run Vitest in watch mode |
 
@@ -75,12 +65,12 @@ The dev server URL is printed in the terminal (typically `http://localhost:5173`
 
 GitHub Actions runs on pushes and pull requests to `main` / `master`:
 
-1. `npm ci`
-2. `npm run typecheck`
-3. `npm run test`
-4. `npm run build`
+1. `pnpm install --frozen-lockfile`
+2. `pnpm run typecheck`
+3. `pnpm run test`
+4. `pnpm run build`
 
-Workflow file: [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+Workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
 ## Path aliases
 
