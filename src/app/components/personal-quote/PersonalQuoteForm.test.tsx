@@ -6,8 +6,16 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { toast } from "sonner";
 
 import { PersonalQuoteForm } from "./PersonalQuoteForm";
+
+vi.mock("sonner", () => ({
+  toast: {
+    error: vi.fn(),
+    success: vi.fn(),
+  },
+}));
 
 describe("PersonalQuoteForm", () => {
   afterEach(() => {
@@ -26,17 +34,12 @@ describe("PersonalQuoteForm", () => {
     expect(screen.getByText("Stay")).toBeInTheDocument();
   });
 
-  it("logs validation failure when submitted empty", async () => {
-    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-
+  it("shows validation errors via toast when submitted empty", async () => {
     render(<PersonalQuoteForm />);
     fireEvent.click(screen.getByRole("button", { name: "Submit Request" }));
 
     await waitFor(() => {
-      expect(errorSpy).toHaveBeenCalled();
+      expect(toast.error).toHaveBeenCalled();
     });
-
-    expect(errorSpy.mock.calls[0][0]).toBe("Personal quote validation failed:");
-    errorSpy.mockRestore();
   });
 });

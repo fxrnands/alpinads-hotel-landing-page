@@ -1,9 +1,17 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { toast } from "sonner";
 
 import { personalQuoteFormDefaultValues } from "@/lib/personalQuote/schema";
 
 import { usePersonalQuoteForm } from "./usePersonalQuoteForm";
+
+vi.mock("sonner", () => ({
+  toast: {
+    error: vi.fn(),
+    success: vi.fn(),
+  },
+}));
 
 const validValues = {
   ...personalQuoteFormDefaultValues,
@@ -50,5 +58,7 @@ describe("usePersonalQuoteForm", () => {
     await waitFor(() => {
       expect(onSubmitError).toHaveBeenCalledOnce();
     });
+
+    expect(toast.error).toHaveBeenCalled();
   });
 });

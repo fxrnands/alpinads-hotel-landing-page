@@ -1,7 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
 import { useForm, type FieldErrors, type UseFormReturn } from "react-hook-form";
+import { toast } from "sonner";
 
+import { collectFormErrorMessages } from "@/lib/personalQuote/formErrorMessages";
 import {
   personalQuoteFormDefaultValues,
   personalQuoteFormSchema,
@@ -46,12 +48,18 @@ export function usePersonalQuoteForm({
 
   const handleInvalidSubmit = useCallback(
     (errors: FieldErrors<PersonalQuoteFormValues>) => {
-      if (onSubmitError) {
-        onSubmitError(errors);
-        return;
+      const messages = collectFormErrorMessages(errors);
+      if (messages.length === 0) {
+        toast.error("Please check the form and try again.");
+      } else if (messages.length === 1) {
+        toast.error(messages[0]);
+      } else {
+        toast.error("Please correct the form.", {
+          description: messages.join("\n"),
+        });
       }
 
-      console.error("Personal quote validation failed:", errors);
+      onSubmitError?.(errors);
     },
     [onSubmitError],
   );

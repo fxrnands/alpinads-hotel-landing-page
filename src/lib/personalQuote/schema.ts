@@ -20,6 +20,11 @@ const servicesShape = Object.fromEntries(
 
 const servicesSchema = z.object(servicesShape);
 
+/** Digits only, for validating international-style numbers with formatting. */
+export function countPhoneDigits(value: string): number {
+  return value.replace(/\D/g, "").length;
+}
+
 const dateRangeSchema = z
   .object({
     from: z.date().optional(),
@@ -58,8 +63,22 @@ const dateRangeSchema = z
 export const personalQuoteFormSchema = z.object({
   firstName: z.string().trim().min(1, "First name is required"),
   lastName: z.string().trim().min(1, "Last name is required"),
-  email: z.string().trim().email("Valid email is required"),
-  phone: z.string().trim().min(1, "Phone number is required"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email address is required")
+    .email("Please enter a valid email address"),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "Phone number is required")
+    .refine(
+      (value) => {
+        const digits = countPhoneDigits(value);
+        return digits >= 8 && digits <= 15;
+      },
+      "Please enter a valid phone number (8–15 digits)",
+    ),
   dateRange: dateRangeSchema,
   guests: guestsSchema,
   roomId: z

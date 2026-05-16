@@ -9,6 +9,7 @@ import {
   PERSONAL_QUOTE_SERVICES,
 } from "@/constants/personalQuote";
 import { usePersonalQuoteForm } from "@/hooks/usePersonalQuoteForm";
+import { sanitizePhoneInput } from "@/lib/personalQuote/phoneInput";
 import {
   PERSONAL_QUOTE_CARD_CLASS,
   PERSONAL_QUOTE_FORM_FIELDS_GAP_CLASS,
@@ -27,6 +28,8 @@ import { cn } from "../ui/utils";
 export function PersonalQuoteForm() {
   const { form, onSubmit } = usePersonalQuoteForm();
   const { control, register } = form;
+
+  const { onChange: onPhoneChange, ...phoneField } = register("phone");
 
   return (
     <Form {...form}>
@@ -68,9 +71,18 @@ export function PersonalQuoteForm() {
                   />
                 }
                 type="tel"
-                placeholder="Phone Number"
+                inputMode="tel"
                 autoComplete="tel"
-                {...register("phone")}
+                placeholder="Phone Number"
+                {...phoneField}
+                onChange={(event) => {
+                  const el = event.currentTarget;
+                  const next = sanitizePhoneInput(el.value);
+                  if (next !== el.value) {
+                    el.value = next;
+                  }
+                  void onPhoneChange(event);
+                }}
               />
             </div>
           </QuoteFormGroup>
