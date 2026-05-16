@@ -130,7 +130,7 @@ export const SANCTUARY_ROOMS: SanctuaryRoom[] = [
     guests: 2,
     areaSqm: 36,
     imageUrl:
-      "https://images.unsplash.com/photo-1596394514703-bf28ebdc0053?w=1200&q=80",
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=1200&q=80",
   },
   {
     id: "crystal-creek-chalet",

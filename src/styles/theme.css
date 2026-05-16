@@ -128,7 +128,7 @@
   }
 
   body {
-    @apply m-0 min-h-full bg-background text-foreground;
+    @apply m-0 min-h-full bg-background font-manrope font-normal text-foreground;
   }
 
   /**

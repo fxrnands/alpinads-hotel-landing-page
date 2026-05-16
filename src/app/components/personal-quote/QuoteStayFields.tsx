@@ -191,9 +191,15 @@ type QuoteRoomSelectProps = {
 };
 
 export function QuoteRoomSelect({ value, onChange }: QuoteRoomSelectProps) {
+  const selectedRoom = PERSONAL_QUOTE_ROOM_OPTIONS.find((room) => room.value === value);
+  const roomSelectAriaLabel = selectedRoom
+    ? `Selected room: ${selectedRoom.label}`
+    : "Select room";
+
   return (
     <Select value={value || undefined} onValueChange={onChange}>
       <SelectTrigger
+        aria-label={roomSelectAriaLabel}
         className={cn(PERSONAL_QUOTE_SELECT_TRIGGER_CLASS, !value && "text-[#323232]/40")}
       >
         <div className="flex min-w-0 flex-1 items-center gap-3">
