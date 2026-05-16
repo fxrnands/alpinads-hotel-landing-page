@@ -8,6 +8,7 @@ import type { DateRange } from "react-day-picker";
 import {
   DATE_RANGE_POPOVER_CONTENT_CLASS,
   DateRangeCalendarResponsive,
+  HERO_DATE_RANGE_POPOVER_CONTENT_CLASS,
 } from "@/lib/booking/dateRangePicker";
 
 import { Button } from "./ui/button";
@@ -190,7 +191,7 @@ export function DateRangeField({
         <PopoverContent
           className={cn(
             "p-0",
-            hero ? DATE_RANGE_POPOVER_CONTENT_CLASS : "w-auto",
+            hero ? HERO_DATE_RANGE_POPOVER_CONTENT_CLASS : "w-auto",
           )}
           align="start"
         >
@@ -200,6 +201,7 @@ export function DateRangeField({
               onSelect={onChange}
               fromDate={new Date()}
               initialFocus
+              stretchDesktop
             />
           ) : (
             <Calendar

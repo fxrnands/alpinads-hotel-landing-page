@@ -61,7 +61,7 @@ export function Navbar() {
         <div className="flex items-center justify-end">
           <Button
             type="button"
-            onClick={() => scrollToSection(SECTION_IDS.booking)}
+            onClick={() => scrollToSection(SECTION_IDS.personalQuote)}
             className="inline-flex h-[45px] w-[109px] shrink-0 items-center justify-center rounded-[12px] border border-[#FFFFFF33] bg-[#00000026] text-center font-manrope text-[14px] font-normal uppercase leading-[150%] tracking-[5%] text-white backdrop-blur-[20px] transition-opacity hover:bg-[#00000026] hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:h-[48px] md:w-[152px] md:rounded-[8px] md:text-base md:leading-[100%]"
           >
             Book now
