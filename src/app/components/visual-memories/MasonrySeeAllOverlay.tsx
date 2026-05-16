@@ -9,7 +9,7 @@ export function MasonrySeeAllOverlay() {
           strokeWidth={1.5}
           aria-hidden
         />
-        <span className="font-manrope text-[16px] font-normal leading-[150%] text-white underline underline-offset-4 md:text-[24px]">
+        <span className="text-[16px] font-normal leading-[150%] text-white underline underline-offset-4 md:text-[24px]">
           See All Photos
         </span>
       </div>

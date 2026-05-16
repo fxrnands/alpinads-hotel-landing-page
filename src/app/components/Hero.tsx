@@ -32,7 +32,7 @@ export function Hero() {
 
       <div className="pointer-events-auto absolute bottom-2 left-0 right-0 z-30 flex justify-center px-2 md:bottom-5 md:px-6">
         <div className="flex w-full max-w-[885px] flex-col items-center gap-6 text-white">
-          <p className="font-manrope text-center text-[20px] font-normal leading-[120%] tracking-normal md:text-[36px]">
+          <p className="text-center text-[20px] font-normal leading-[120%] tracking-normal md:text-[36px]">
             The Silence of the Alps, Redefined.
           </p>
           <form
@@ -55,7 +55,7 @@ export function Hero() {
             </div>
             <Button
               type="submit"
-              className="order-4 flex h-[48px] w-full shrink-0 items-center justify-center rounded-none bg-[#A49781] px-6 py-0 font-manrope text-base font-normal uppercase leading-[150%] tracking-[5%] text-white hover:bg-[#A49781]/90 md:h-full md:min-h-0 md:w-[240px] md:min-w-[240px] md:max-w-[240px] md:shrink-0"
+              className="order-4 flex h-[48px] w-full shrink-0 items-center justify-center rounded-none bg-[#A49781] px-6 py-0 text-base font-normal uppercase leading-[150%] tracking-[5%] text-white hover:bg-[#A49781]/90 md:h-full md:min-h-0 md:w-[240px] md:min-w-[240px] md:max-w-[240px] md:shrink-0"
             >
               Request
             </Button>

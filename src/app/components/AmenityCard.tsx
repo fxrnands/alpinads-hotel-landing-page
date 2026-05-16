@@ -80,7 +80,7 @@ export function AmenityCard({ amenity, className, cardWidth }: AmenityCardProps)
       >
         <h3
           className={cn(
-            "font-manrope font-normal leading-[150%] tracking-normal text-[#323232]",
+            "font-normal leading-[150%] tracking-normal text-[#323232]",
             isMobileSized ? "line-clamp-2" : AMENITY_CARD_TITLE_CLASS,
           )}
           style={isMobileSized ? { fontSize: titleFontSize } : undefined}
@@ -89,7 +89,7 @@ export function AmenityCard({ amenity, className, cardWidth }: AmenityCardProps)
         </h3>
         <p
           className={cn(
-            "font-manrope font-normal leading-[150%] tracking-normal text-[#323232]/70",
+            "font-normal leading-[150%] tracking-normal text-[#323232]/70",
             isMobileSized ? "line-clamp-3" : AMENITY_CARD_DESCRIPTION_CLASS,
           )}
           style={isMobileSized ? { fontSize: descFontSize } : undefined}

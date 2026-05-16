@@ -115,7 +115,7 @@ export function PersonalQuoteForm() {
                     className="size-4 shrink-0 rounded-[4px] border border-[#3232321A] accent-[#A49781]"
                     {...register(`services.${service.id}`)}
                   />
-                  <span className="font-manrope text-[16px] font-normal leading-[150%] text-[#323232]">
+                  <span className="text-[16px] font-normal leading-[150%] text-[#323232]">
                     {service.label}
                   </span>
                 </label>

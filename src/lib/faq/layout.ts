@@ -8,10 +8,10 @@ export const FAQ_SECTION_PADDING_CLASS = "py-[80px] lg:py-[120px]" as const;
 export const FAQ_COLUMNS_GAP_CLASS = "gap-10 lg:gap-[80px]" as const;
 
 export const FAQ_TITLE_CLASS =
-  "text-center font-manrope text-[24px] font-normal leading-[140%] tracking-normal text-[#524A46] md:text-left md:text-[32px] md:text-[#323232] xl:text-[40px]" as const;
+  "text-center text-[24px] font-normal leading-[140%] tracking-normal text-[#524A46] md:text-left md:text-[32px] md:text-[#323232] xl:text-[40px]" as const;
 
 export const FAQ_DESCRIPTION_CLASS =
-  "max-w-[640px] text-center font-manrope text-[16px] font-normal leading-[140%] tracking-normal text-[#524A46]/80 lg:max-w-none lg:text-left lg:leading-[150%] lg:tracking-[-0.01em] lg:text-[#323232]/80" as const;
+  "max-w-[640px] text-center text-[16px] font-normal leading-[140%] tracking-normal text-[#524A46]/80 lg:max-w-none lg:text-left lg:leading-[150%] lg:tracking-[-0.01em] lg:text-[#323232]/80" as const;
 
 /** Mobile 12px; desktop 20px between accordion cards. */
 export const FAQ_ACCORDION_GAP_CLASS = "gap-3 lg:gap-5" as const;
@@ -25,10 +25,10 @@ export const FAQ_TITLE_TO_DESCRIPTION_GAP_CLASS = "mt-6 lg:mt-4" as const;
 export const FAQ_DESCRIPTION_TO_IMAGE_GAP_CLASS = "mt-10 lg:mt-8" as const;
 
 export const FAQ_QUESTION_TEXT_CLASS =
-  "font-manrope text-[16px] font-normal leading-[140%] tracking-normal text-[#323232]" as const;
+  "text-[16px] font-normal leading-[140%] tracking-normal text-[#323232]" as const;
 
 export const FAQ_ANSWER_TEXT_CLASS =
-  "font-manrope text-[16px] font-normal leading-[140%] tracking-normal text-[#323232]/80" as const;
+  "text-[16px] font-normal leading-[140%] tracking-normal text-[#323232]/80" as const;
 
 export const FAQ_ASIDE_CLASS =
   "flex w-full flex-col items-center text-center lg:max-w-[648px] lg:flex-1 lg:items-start lg:text-left" as const;

@@ -7,7 +7,7 @@ import { SECTION_IDS, type SectionId } from "../sections";
 import { cn } from "./ui/utils";
 
 const NAV_LINK_CLASS =
-  "rounded-sm font-manrope text-base font-normal uppercase leading-[100%] tracking-[5%] text-white transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent";
+  "rounded-sm text-base font-normal uppercase leading-[100%] tracking-[5%] text-white transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent";
 
 function scrollToSection(sectionId: SectionId): void {
   scrollToElementId(resolveSectionScrollTarget(sectionId));
@@ -62,7 +62,7 @@ export function Navbar() {
           <Button
             type="button"
             onClick={() => scrollToSection(SECTION_IDS.personalQuote)}
-            className="inline-flex h-[45px] w-[109px] shrink-0 items-center justify-center rounded-[12px] border border-[#FFFFFF33] bg-[#00000026] text-center font-manrope text-[14px] font-normal uppercase leading-[150%] tracking-[5%] text-white backdrop-blur-[20px] transition-opacity hover:bg-[#00000026] hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:h-[48px] md:w-[152px] md:rounded-[8px] md:text-base md:leading-[100%]"
+            className="inline-flex h-[45px] w-[109px] shrink-0 items-center justify-center rounded-[12px] border border-[#FFFFFF33] bg-[#00000026] text-center text-[14px] font-normal uppercase leading-[150%] tracking-[5%] text-white backdrop-blur-[20px] transition-opacity hover:bg-[#00000026] hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:h-[48px] md:w-[152px] md:rounded-[8px] md:text-base md:leading-[100%]"
           >
             Book now
           </Button>

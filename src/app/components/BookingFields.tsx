@@ -74,7 +74,7 @@ export function FieldShell({
       >
         <span
           className={cn(
-            "font-manrope uppercase",
+            "uppercase",
             isBar
               ? "text-[14px] font-normal leading-[100%] tracking-normal text-white/70"
               : "tracking-widest text-muted-foreground",
@@ -85,7 +85,6 @@ export function FieldShell({
         </span>
         <span
           className={cn(
-            "font-manrope",
             isBar
               ? "min-w-0 truncate text-base font-normal leading-normal tracking-normal text-white"
               : "truncate text-base font-normal text-foreground",

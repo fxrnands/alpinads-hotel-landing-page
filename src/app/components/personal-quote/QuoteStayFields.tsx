@@ -159,8 +159,8 @@ function GuestStepper({
   return (
     <div className="flex items-center justify-between">
       <div>
-        <div className="font-manrope text-sm text-[#323232]">{label}</div>
-        <div className="font-manrope text-xs text-[#323232]/60">{sublabel}</div>
+        <div className="text-sm text-[#323232]">{label}</div>
+        <div className="text-xs text-[#323232]/60">{sublabel}</div>
       </div>
       <div className="flex items-center gap-3">
         <Button

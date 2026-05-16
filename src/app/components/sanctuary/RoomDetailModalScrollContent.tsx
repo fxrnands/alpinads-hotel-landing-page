@@ -25,7 +25,7 @@ export function RoomDetailModalScrollContent({
 }: RoomDetailModalScrollContentProps) {
   const quickInfoIconClass =
     "size-6 shrink-0 text-[#A49781] max-md:text-[#323232]";
-  const bodyClass = "font-manrope text-[16px] font-normal leading-[140%] tracking-normal text-[#323232]";
+  const bodyClass = "text-[16px] font-normal leading-[140%] tracking-normal text-[#323232]";
 
   return (
     <div className="min-h-0 shrink-0 pt-5 max-md:overflow-visible md:min-h-0 md:flex-1 md:overflow-y-auto md:pt-0">
@@ -33,7 +33,7 @@ export function RoomDetailModalScrollContent({
         <div>
           <h2
             id="room-detail-title"
-            className="font-manrope text-[20px] font-normal leading-[140%] tracking-normal text-[#323232] md:mt-[20px]"
+            className="text-[20px] font-normal leading-[140%] tracking-normal text-[#323232] md:mt-[20px]"
           >
             {room.title}
           </h2>

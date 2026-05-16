@@ -36,7 +36,7 @@ const GALLERY_NAV_BUTTON_CLASS = cn(
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60",
 );
 
-const FILTER_PILL_CLASS = "rounded-[12px] px-5 py-3 font-manrope text-[14px] font-normal leading-[150%] transition-colors";
+const FILTER_PILL_CLASS = "rounded-[12px] px-5 py-3 text-[14px] font-normal leading-[150%] transition-colors";
 
 const DIALOG_SURFACE_CLASS = cn(
   "fixed inset-0 z-50 flex min-h-0 min-w-full w-full max-w-none flex-col border-0 bg-transparent p-0 shadow-none",
@@ -246,7 +246,7 @@ export function VisualMemoriesSeeAllPhotosModal({
                 >
                   <ArrowLeft className="size-[18px]" strokeWidth={1.75} aria-hidden />
                 </button>
-                <span className="min-w-[4rem] text-center font-manrope text-[20px] font-normal tabular-nums leading-none text-white">
+                <span className="min-w-[4rem] text-center text-[20px] font-normal tabular-nums leading-none text-white">
                   {positionLabel}
                 </span>
                 <button

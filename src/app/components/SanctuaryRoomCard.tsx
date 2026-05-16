@@ -46,20 +46,20 @@ export function SanctuaryRoomCard({
           draggable={false}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <span className="absolute right-2 top-2 rounded-[8px] bg-white p-[10px] font-manrope text-[16px] font-normal leading-[150%] tracking-normal text-[#323232]">
+        <span className="absolute right-2 top-2 rounded-[8px] bg-white p-[10px] text-[16px] font-normal leading-[150%] tracking-normal text-[#323232]">
           {room.priceLabel}
         </span>
       </div>
 
       <div className="flex min-w-0 flex-col gap-[16px] p-3 md:min-h-0 md:overflow-hidden">
-        <h3 className="line-clamp-2 text-left font-manrope text-[20px] font-normal leading-[140%] tracking-normal text-[#323232]">
+        <h3 className="line-clamp-2 text-left text-[20px] font-normal leading-[140%] tracking-normal text-[#323232]">
           {room.title}
         </h3>
-        <p className="line-clamp-2 text-left font-manrope text-[16px] font-normal leading-[140%] tracking-normal text-[#323232]/70">
+        <p className="line-clamp-2 text-left text-[16px] font-normal leading-[140%] tracking-normal text-[#323232]/70">
           {room.description}
         </p>
 
-        <div className="flex min-w-0 flex-wrap items-center gap-[12px] font-manrope text-[16px] font-normal leading-[150%] tracking-normal text-[#323232]">
+        <div className="flex min-w-0 flex-wrap items-center gap-[12px] text-[16px] font-normal leading-[150%] tracking-normal text-[#323232]">
           <Users className="size-6 shrink-0" strokeWidth={1.75} aria-hidden />
           <span>{guestLabel}</span>
           <MoveHorizontal className="size-6 shrink-0" strokeWidth={1.75} aria-hidden />
@@ -69,7 +69,7 @@ export function SanctuaryRoomCard({
         <Button
           type="button"
           onClick={() => onSeeDetails?.(room)}
-          className="h-12 w-full min-w-0 shrink-0 rounded-[8px] border border-solid border-[#32323233] bg-transparent font-manrope text-[14px] font-normal uppercase leading-[150%] tracking-[5%] text-[#323232] hover:bg-[#323232]/5 md:mt-auto"
+          className="h-12 w-full min-w-0 shrink-0 rounded-[8px] border border-solid border-[#32323233] bg-transparent text-[14px] font-normal uppercase leading-[150%] tracking-[5%] text-[#323232] hover:bg-[#323232]/5 md:mt-auto"
         >
           See Details
         </Button>

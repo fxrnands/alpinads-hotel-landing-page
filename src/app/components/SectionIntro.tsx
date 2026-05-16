@@ -32,7 +32,7 @@ export function SectionIntro({
     >
       <div
         className={cn(
-          "pb-[21px] font-manrope text-[14px] font-normal leading-[150%] tracking-normal text-[#524A46] md:mb-3 md:pb-0 md:text-base md:text-[#323232]",
+          "pb-[21px] text-[14px] font-normal leading-[150%] tracking-normal text-[#524A46] md:mb-3 md:pb-0 md:text-base md:text-[#323232]",
           eyebrowClassName,
         )}
       >
@@ -40,7 +40,7 @@ export function SectionIntro({
       </div>
       <h2
         className={cn(
-          "pb-6 font-manrope text-[24px] font-normal leading-[140%] tracking-normal text-[#524A46] md:mb-6 md:pb-0 md:text-[40px] md:text-[#323232]",
+          "pb-6 text-[24px] font-normal leading-[140%] tracking-normal text-[#524A46] md:mb-6 md:pb-0 md:text-[40px] md:text-[#323232]",
           !description && !titleClassName && "pb-10 md:pb-12",
           titleClassName,
         )}
@@ -48,7 +48,7 @@ export function SectionIntro({
         {title}
       </h2>
       {description ? (
-        <p className="max-w-[640px] pb-10 font-manrope text-[16px] font-normal leading-[140%] tracking-normal text-[#524A46] md:max-w-none md:pb-0 md:text-base md:leading-[150%] md:text-[#323232]">
+        <p className="max-w-[640px] pb-10 text-[16px] font-normal leading-[140%] tracking-normal text-[#524A46] md:max-w-none md:pb-0 md:text-base md:leading-[150%] md:text-[#323232]">
           {description}
         </p>
       ) : null}

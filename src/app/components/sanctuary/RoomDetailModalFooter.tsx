@@ -10,13 +10,13 @@ export function RoomDetailModalFooter({ onClose }: RoomDetailModalFooterProps) {
       <Button
         type="button"
         onClick={onClose}
-        className="h-12 min-h-0 min-w-0 flex-1 shrink basis-0 rounded-[12px] border border-solid border-[#32323233] bg-white px-3 font-manrope text-[14px] font-normal uppercase leading-[150%] tracking-[0.05em] text-[#323232] hover:bg-[#323232]/5"
+        className="h-12 min-h-0 min-w-0 flex-1 shrink basis-0 rounded-[12px] border border-solid border-[#32323233] bg-white px-3 text-[14px] font-normal uppercase leading-[150%] tracking-[0.05em] text-[#323232] hover:bg-[#323232]/5"
       >
         Close
       </Button>
       <Button
         type="button"
-        className="h-12 min-h-0 min-w-0 flex-1 shrink basis-0 rounded-[12px] border border-solid border-[#A49781] bg-[#A49781] px-3 font-manrope text-[14px] font-normal uppercase leading-[150%] tracking-[0.05em] text-white hover:bg-[#A49781]/90"
+        className="h-12 min-h-0 min-w-0 flex-1 shrink basis-0 rounded-[12px] border border-solid border-[#A49781] bg-[#A49781] px-3 text-[14px] font-normal uppercase leading-[150%] tracking-[0.05em] text-white hover:bg-[#A49781]/90"
       >
         Reserve this suite
       </Button>
