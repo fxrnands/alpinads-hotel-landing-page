@@ -10,10 +10,12 @@ import { MasonryTile } from "./MasonryTile";
 
 type VisualMemoriesMasonryMobileProps = {
   imagesByArea: VisualMemoriesImagesByArea;
+  onOpenSeeAllGallery: () => void;
 };
 
 export function VisualMemoriesMasonryMobile({
   imagesByArea,
+  onOpenSeeAllGallery,
 }: VisualMemoriesMasonryMobileProps) {
   return (
     <div
@@ -48,6 +50,7 @@ export function VisualMemoriesMasonryMobile({
         image={imagesByArea.terrace}
         metrics={VISUAL_MEMORIES_MOBILE_METRICS.terrace}
         seeAllOverlay
+        onSeeAllPhotos={onOpenSeeAllGallery}
       />
     </div>
   );

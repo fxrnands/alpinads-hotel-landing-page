@@ -1,3 +1,4 @@
+export { listVisualMemoriesGalleryImages } from "./gallery";
 export {
   VISUAL_MEMORIES_BY_AREA,
   type VisualMemoriesImagesByArea,

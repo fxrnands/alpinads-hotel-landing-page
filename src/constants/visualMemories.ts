@@ -6,6 +6,21 @@ export type VisualMemoryGridArea =
   | "terrace"
   | "seeAll";
 
+/** Gallery filter tabs (excluding "all", which is implicit). */
+export type VisualMemoryGalleryTag = "rooms" | "wellness" | "culinary";
+
+export type VisualMemoryGalleryFilterId = "all" | VisualMemoryGalleryTag;
+
+export const VISUAL_MEMORIES_GALLERY_FILTERS: readonly {
+  id: VisualMemoryGalleryFilterId;
+  label: string;
+}[] = [
+  { id: "all", label: "All Photos" },
+  { id: "rooms", label: "Rooms" },
+  { id: "wellness", label: "Wellness" },
+  { id: "culinary", label: "Culinary" },
+] as const;
+
 export const VISUAL_MEMORIES_GAP_PX = 16;
 
 export const VISUAL_MEMORY_COLUMN_WIDTHS = [436, 436, 456] as const;
@@ -30,6 +45,8 @@ export type VisualMemoryImage = {
   designHeight: number;
   /** Static Tailwind class (must be a string literal for JIT). */
   aspectClass: string;
+  /** Shown when the given filter tab is active ("All Photos" includes every image). */
+  galleryTags: readonly VisualMemoryGalleryTag[];
 };
 
 export const VISUAL_MEMORIES_IMAGES: VisualMemoryImage[] = [
@@ -41,6 +58,7 @@ export const VISUAL_MEMORIES_IMAGES: VisualMemoryImage[] = [
     designWidth: 436,
     designHeight: 296,
     aspectClass: "aspect-[436/296]",
+    galleryTags: ["rooms", "culinary"],
   },
   {
     id: "cinque-terre",
@@ -50,6 +68,7 @@ export const VISUAL_MEMORIES_IMAGES: VisualMemoryImage[] = [
     designWidth: 436,
     designHeight: 296,
     aspectClass: "aspect-[436/296]",
+    galleryTags: ["rooms", "wellness"],
   },
   {
     id: "tuscany",
@@ -59,6 +78,7 @@ export const VISUAL_MEMORIES_IMAGES: VisualMemoryImage[] = [
     designWidth: 436,
     designHeight: 608,
     aspectClass: "aspect-[436/608]",
+    galleryTags: ["rooms", "wellness"],
   },
   {
     id: "colosseum",
@@ -68,6 +88,7 @@ export const VISUAL_MEMORIES_IMAGES: VisualMemoryImage[] = [
     designWidth: 456,
     designHeight: 335,
     aspectClass: "aspect-[456/335]",
+    galleryTags: ["rooms", "culinary"],
   },
   {
     id: "terrace",
@@ -77,6 +98,7 @@ export const VISUAL_MEMORIES_IMAGES: VisualMemoryImage[] = [
     designWidth: 888,
     designHeight: 292,
     aspectClass: "aspect-[888/292]",
+    galleryTags: ["rooms", "wellness"],
   },
   {
     id: "hills",
@@ -86,5 +108,6 @@ export const VISUAL_MEMORIES_IMAGES: VisualMemoryImage[] = [
     designWidth: 456,
     designHeight: 565,
     aspectClass: "aspect-[456/565]",
+    galleryTags: ["rooms", "wellness"],
   },
 ];

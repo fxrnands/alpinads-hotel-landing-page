@@ -11,12 +11,14 @@ type MasonryTileProps = {
   image: VisualMemoryImage;
   metrics?: VisualMemoryMobileMetrics;
   seeAllOverlay?: boolean;
+  onSeeAllPhotos?: () => void;
 };
 
 export function MasonryTile({
   image,
   metrics,
   seeAllOverlay = false,
+  onSeeAllPhotos,
 }: MasonryTileProps) {
   const tileStyle = getVisualMemoryTileAspectStyle(
     image,
@@ -36,6 +38,7 @@ export function MasonryTile({
         )}
         style={tileStyle}
         aria-label="See all photos"
+        onClick={onSeeAllPhotos}
       >
         <MasonryImage image={image} alt={seeAllOverlay ? "" : undefined} />
         <MasonrySeeAllOverlay />

@@ -15,11 +15,13 @@ import { MasonryTile } from "./MasonryTile";
 type VisualMemoriesMasonryDesktopProps = {
   imagesByArea: VisualMemoriesImagesByArea;
   galleryStyle: CSSProperties;
+  onOpenSeeAllGallery: () => void;
 };
 
 export function VisualMemoriesMasonryDesktop({
   imagesByArea,
   galleryStyle,
+  onOpenSeeAllGallery,
 }: VisualMemoriesMasonryDesktopProps) {
   return (
     <div
@@ -63,7 +65,7 @@ export function VisualMemoriesMasonryDesktop({
         )}
       >
         <MasonryTile image={imagesByArea.colosseum} />
-        <MasonryTile image={imagesByArea.seeAll} />
+        <MasonryTile image={imagesByArea.seeAll} onSeeAllPhotos={onOpenSeeAllGallery} />
       </div>
     </div>
   );
