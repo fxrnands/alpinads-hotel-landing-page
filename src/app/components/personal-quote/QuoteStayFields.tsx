@@ -13,7 +13,7 @@ import {
 import { Button } from "@/app/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/app/components/ui/popover";
 import {
-  DATE_RANGE_POPOVER_CONTENT_CLASS,
+  DATE_RANGE_POPOVER_MATCH_TRIGGER_CLASS,
   DateRangeCalendarResponsive,
 } from "@/lib/booking/dateRangePicker";
 import {
@@ -75,7 +75,7 @@ export function QuoteDateRangeField({ dateRange, onChange }: QuoteDateRangeField
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className={cn("p-0", DATE_RANGE_POPOVER_CONTENT_CLASS)}
+        className={cn("p-0", DATE_RANGE_POPOVER_MATCH_TRIGGER_CLASS)}
         align="start"
       >
         <DateRangeCalendarResponsive
@@ -83,6 +83,7 @@ export function QuoteDateRangeField({ dateRange, onChange }: QuoteDateRangeField
           onSelect={onChange}
           fromDate={new Date()}
           initialFocus
+          singleMonthLayout
         />
       </PopoverContent>
     </Popover>

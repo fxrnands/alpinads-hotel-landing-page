@@ -8,15 +8,28 @@ export type DateRangeCalendarResponsiveProps = {
   fromDate?: Date;
   initialFocus?: boolean;
   className?: string;
-  /** When true, desktop range calendar uses full width of a wide popover (e.g. hero bar). */
   stretchDesktop?: boolean;
+  singleMonthLayout?: boolean;
 };
 
 export function DateRangeCalendarResponsive({
   className,
   stretchDesktop = false,
+  singleMonthLayout = false,
   ...rest
 }: DateRangeCalendarResponsiveProps) {
+  if (singleMonthLayout) {
+    return (
+      <Calendar
+        className={className}
+        {...rest}
+        mode="range"
+        numberOfMonths={1}
+        stretch
+      />
+    );
+  }
+
   return (
     <>
       <div className="md:hidden">
