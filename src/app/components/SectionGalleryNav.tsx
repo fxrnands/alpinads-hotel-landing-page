@@ -14,7 +14,7 @@ type SectionGalleryNavProps = {
 };
 
 const navButtonBaseClass =
-  "flex size-[45px] shrink-0 items-center justify-center rounded-[8px] bg-[#A49781] backdrop-blur-[20px] transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A49781]/40 focus-visible:ring-offset-2";
+  "flex size-[45px] shrink-0 touch-manipulation items-center justify-center rounded-[8px] bg-[#A49781] backdrop-blur-[20px] transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A49781]/40 focus-visible:ring-offset-2";
 
 const navButtonEnabledClass = "text-white hover:opacity-90";
 const navButtonDisabledClass =

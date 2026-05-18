@@ -13,13 +13,11 @@ import {
 
 import { ImageWithFallback } from "./media/ImageWithFallback";
 import { PersonalQuoteForm } from "./personal-quote/PersonalQuoteForm";
-import { SECTION_IDS } from "../sections";
 import { cn } from "./ui/utils";
 
 export function PersonalQuote() {
   return (
-    <section
-      id={SECTION_IDS.personalQuote}
+    <div
       className={cn("relative w-full overflow-hidden", PERSONAL_QUOTE_SECTION_PADDING_CLASS)}
     >
       <ImageWithFallback
@@ -45,6 +43,6 @@ export function PersonalQuote() {
           <PersonalQuoteForm />
         </div>
       </div>
-    </section>
+    </div>
   );
 }

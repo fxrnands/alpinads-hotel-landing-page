@@ -1,3 +1,5 @@
+import type { HTMLAttributes } from "react";
+
 import { HERITAGE_SLIDE_URLS } from "@/constants/heritageSlides";
 import { useHeritageSliderGeometry } from "@/hooks/useHeritageSliderGeometry";
 import { useInfiniteLoopSlider } from "@/hooks/useInfiniteLoopSlider";
@@ -20,6 +22,7 @@ export function OurHeritage() {
     goPrev,
     goNext,
     onTrackTransitionEnd,
+    onTrackTransitionCancel,
   } = useInfiniteLoopSlider(HERITAGE_SLIDE_URLS, sliderOptions);
 
   return (
@@ -40,11 +43,22 @@ export function OurHeritage() {
           />
         </div>
 
-        <div className="w-full overflow-x-hidden md:px-10">
+        <div
+          className={cn(
+            "w-full overflow-x-hidden max-md:px-0",
+            "md:relative md:left-1/2 md:w-screen md:max-w-none md:-translate-x-1/2",
+            "md:overflow-x-clip md:px-0 md:pl-[calc((100vw-min(100vw,1920px))/2+2.5rem)] md:pr-0",
+          )}
+        >
           <div
             className={cn(
               "flex w-max flex-nowrap",
-              transitionOn ? "transition-transform duration-500 ease-out" : "",
+              transitionOn &&
+                cn(
+                  "transition-transform will-change-transform",
+                  "max-md:duration-300 max-md:ease-[cubic-bezier(0.32,0.72,0,1)]",
+                  "md:duration-500 md:ease-out",
+                ),
             )}
             style={{
               transform: `translate3d(-${translatePx}px, 0, 0)`,
@@ -53,12 +67,15 @@ export function OurHeritage() {
             role="list"
             aria-label="Heritage image gallery"
             onTransitionEnd={onTrackTransitionEnd}
+            {...({
+              onTransitionCancel: onTrackTransitionCancel,
+            } as HTMLAttributes<HTMLDivElement>)}
           >
             {loopSlides.map((src, index) => (
               <div
                 key={`${index}-${src}`}
                 role="listitem"
-                className="relative shrink-0 overflow-hidden rounded-none bg-muted"
+                className="relative max-md:aspect-square aspect-[748/519] max-h-[519px] max-w-[748px] shrink-0 overflow-hidden rounded-none bg-muted"
                 style={{ width: slideWidth, height: slideHeight }}
               >
                 <ImageWithFallback

@@ -1,8 +1,11 @@
 import { lazy } from "react";
 
+import { HeroBookingPrefillProvider } from "@/contexts/HeroBookingPrefillContext";
+
 import { Footer } from "../components/Footer";
 import { Hero } from "../components/Hero";
 import { SectionSuspense } from "../components/SectionSuspense";
+import { SECTION_IDS } from "../sections";
 
 const OurHeritage = lazy(() =>
   import("../components/OurHeritage").then((module) => ({ default: module.OurHeritage })),
@@ -27,7 +30,7 @@ const PersonalQuote = lazy(() =>
 
 export function LandingPage() {
   return (
-    <>
+    <HeroBookingPrefillProvider>
       <Hero />
       <SectionSuspense minHeight="70vh">
         <OurHeritage />
@@ -44,10 +47,12 @@ export function LandingPage() {
       <SectionSuspense minHeight="50vh">
         <Faq />
       </SectionSuspense>
-      <SectionSuspense minHeight="80vh">
-        <PersonalQuote />
-      </SectionSuspense>
+      <section id={SECTION_IDS.personalQuote} className="w-full">
+        <SectionSuspense minHeight="80vh">
+          <PersonalQuote />
+        </SectionSuspense>
+      </section>
       <Footer />
-    </>
+    </HeroBookingPrefillProvider>
   );
 }

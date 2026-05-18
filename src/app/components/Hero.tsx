@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import type { DateRange } from "react-day-picker";
 
+import { useHeroBookingPrefill } from "@/contexts/HeroBookingPrefillContext";
+import {
+  buildHeroBookingQuotePrefill,
+  hasHeroBookingQuotePrefill,
+} from "@/lib/heroBookingPrefill";
 import { scrollToElementId } from "@/utils/smoothScroll";
 
 import { SECTION_IDS } from "../sections";
@@ -10,8 +15,20 @@ import { HeroCarousel } from "./HeroCarousel";
 import { Navbar } from "./Navbar";
 
 export function Hero() {
+  const { setQuotePrefill } = useHeroBookingPrefill();
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [guests, setGuests] = useState<Guests>({ adults: 0, children: 0 });
+
+  const handleRequestSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const prefill = buildHeroBookingQuotePrefill({ dateRange, guests });
+    if (hasHeroBookingQuotePrefill(prefill)) {
+      setQuotePrefill(prefill);
+    }
+
+    scrollToElementId(SECTION_IDS.personalQuote);
+  };
 
   return (
     <section className="relative min-h-[100vh] w-full overflow-x-hidden">
@@ -37,10 +54,7 @@ export function Hero() {
           </p>
           <form
             id={SECTION_IDS.booking}
-            onSubmit={(e) => {
-              e.preventDefault();
-              scrollToElementId(SECTION_IDS.heritage);
-            }}
+            onSubmit={handleRequestSubmit}
             className="flex w-full flex-col gap-2 overflow-hidden rounded-[12px] border border-white/10 bg-black/25 p-0 text-white backdrop-blur-[100px] md:h-[72px] md:min-h-0 md:flex-row md:items-stretch md:gap-3 md:rounded-[8px]"
           >
             <div className="order-1 min-w-0 md:order-3 md:flex-1 md:basis-0">

@@ -1,9 +1,15 @@
 import { useLayoutEffect, useMemo, useState } from "react";
 
+import {
+  HERITAGE_MD_MIN_PX,
+  resolveHeritageSliderGeometry,
+} from "@/lib/heritage/geometry";
+import { stabilizeMeasuredWidth } from "@/lib/viewport/stabilizeWidth";
+
 import type { InfiniteLoopSliderOptions } from "./useInfiniteLoopSlider";
 
-/** Matches Tailwind `md` (48rem at 16px root). Not used for CSS—slider math needs a px threshold. */
-const MD_MIN_PX = 768;
+export const HERITAGE_VIEWPORT_STABLE_DELTA_PX = 4;
+export const HERITAGE_RESIZE_DEBOUNCE_MS = 120;
 
 export function useHeritageSliderGeometry(): InfiniteLoopSliderOptions {
   const [viewportWidth, setViewportWidth] = useState(() =>
@@ -13,40 +19,41 @@ export function useHeritageSliderGeometry(): InfiniteLoopSliderOptions {
   );
 
   useLayoutEffect(() => {
+    let debounceId: ReturnType<typeof setTimeout> | undefined;
+
+    const commitWidth = (nextWidth: number) => {
+      setViewportWidth((prev) =>
+        stabilizeMeasuredWidth(prev, nextWidth, HERITAGE_VIEWPORT_STABLE_DELTA_PX),
+      );
+    };
+
     const measure = () => {
-      setViewportWidth(Math.round(window.visualViewport?.width ?? window.innerWidth));
+      commitWidth(Math.round(window.visualViewport?.width ?? window.innerWidth));
+    };
+
+    const scheduleMeasure = () => {
+      if (debounceId !== undefined) {
+        clearTimeout(debounceId);
+      }
+      debounceId = setTimeout(measure, HERITAGE_RESIZE_DEBOUNCE_MS);
     };
 
     measure();
-    window.addEventListener("resize", measure);
-    window.visualViewport?.addEventListener("resize", measure);
+    window.addEventListener("resize", scheduleMeasure);
+    window.visualViewport?.addEventListener("resize", scheduleMeasure);
     return () => {
-      window.removeEventListener("resize", measure);
-      window.visualViewport?.removeEventListener("resize", measure);
+      if (debounceId !== undefined) {
+        clearTimeout(debounceId);
+      }
+      window.removeEventListener("resize", scheduleMeasure);
+      window.visualViewport?.removeEventListener("resize", scheduleMeasure);
     };
   }, []);
 
-  return useMemo(() => {
-    const isMdUp = viewportWidth >= MD_MIN_PX;
-
-    if (isMdUp) {
-      return {
-        slideWidth: 748,
-        slideHeight: 519,
-        slideGap: 16,
-        translateOffset: 0,
-      };
-    }
-
-    const vw = viewportWidth > 0 ? viewportWidth : 390;
-    const slideGap = 12;
-    const slideSide = Math.round(Math.max(240, Math.min(vw * 0.82, vw - 24)));
-
-    return {
-      slideWidth: slideSide,
-      slideHeight: slideSide,
-      slideGap,
-      centerInViewportWidth: vw,
-    };
-  }, [viewportWidth]);
+  return useMemo(
+    () => resolveHeritageSliderGeometry(viewportWidth),
+    [viewportWidth],
+  );
 }
+
+export { HERITAGE_MD_MIN_PX };

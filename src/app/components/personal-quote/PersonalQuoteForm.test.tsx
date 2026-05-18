@@ -8,7 +8,17 @@ import {
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { toast } from "sonner";
 
+import { HeroBookingPrefillProvider } from "@/contexts/HeroBookingPrefillContext";
+
 import { PersonalQuoteForm } from "./PersonalQuoteForm";
+
+function renderForm() {
+  return render(
+    <HeroBookingPrefillProvider>
+      <PersonalQuoteForm />
+    </HeroBookingPrefillProvider>,
+  );
+}
 
 vi.mock("sonner", () => ({
   toast: {
@@ -23,7 +33,7 @@ describe("PersonalQuoteForm", () => {
   });
 
   it("renders detail, stay, and submit controls", () => {
-    render(<PersonalQuoteForm />);
+    renderForm();
 
     expect(screen.getByPlaceholderText("First Name")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Last Name")).toBeInTheDocument();
@@ -35,7 +45,7 @@ describe("PersonalQuoteForm", () => {
   });
 
   it("shows validation errors via toast when submitted empty", async () => {
-    render(<PersonalQuoteForm />);
+    renderForm();
     fireEvent.click(screen.getByRole("button", { name: "Submit Request" }));
 
     await waitFor(() => {

@@ -61,4 +61,18 @@ describe("usePersonalQuoteForm", () => {
 
     expect(toast.error).toHaveBeenCalled();
   });
+
+  it("shows a toast with validation messages when submit fails without a handler", async () => {
+    const { result } = renderHook(() => usePersonalQuoteForm());
+
+    await result.current.onSubmit();
+
+    await waitFor(() => {
+      expect(toast.error).toHaveBeenCalled();
+    });
+
+    const [message] = vi.mocked(toast.error).mock.calls[0];
+    expect(typeof message).toBe("string");
+    expect(String(message).length).toBeGreaterThan(0);
+  });
 });

@@ -1,4 +1,5 @@
 import { Mail, Phone } from "lucide-react";
+import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 
 import { Button } from "@/app/components/ui/button";
@@ -8,7 +9,9 @@ import {
   PERSONAL_QUOTE_FIELD_ICONS,
   PERSONAL_QUOTE_SERVICES,
 } from "@/constants/personalQuote";
+import { useHeroBookingPrefill } from "@/contexts/HeroBookingPrefillContext";
 import { usePersonalQuoteForm } from "@/hooks/usePersonalQuoteForm";
+import { hasHeroBookingQuotePrefill } from "@/lib/heroBookingPrefill";
 import { sanitizePhoneInput } from "@/lib/personalQuote/phoneInput";
 import {
   PERSONAL_QUOTE_CARD_CLASS,
@@ -26,10 +29,26 @@ import { QuoteDateRangeField, QuoteGuestsField, QuoteRoomSelect } from "./QuoteS
 import { cn } from "../ui/utils";
 
 export function PersonalQuoteForm() {
+  const { pendingQuotePrefill, clearQuotePrefill } = useHeroBookingPrefill();
   const { form, onSubmit } = usePersonalQuoteForm();
-  const { control, register } = form;
+  const { control, register, setValue } = form;
 
   const { onChange: onPhoneChange, ...phoneField } = register("phone");
+
+  useEffect(() => {
+    if (!pendingQuotePrefill || !hasHeroBookingQuotePrefill(pendingQuotePrefill)) {
+      return;
+    }
+
+    if (pendingQuotePrefill.dateRange) {
+      setValue("dateRange", pendingQuotePrefill.dateRange, { shouldDirty: true });
+    }
+    if (pendingQuotePrefill.guests) {
+      setValue("guests", pendingQuotePrefill.guests, { shouldDirty: true });
+    }
+
+    clearQuotePrefill();
+  }, [pendingQuotePrefill, clearQuotePrefill, setValue]);
 
   return (
     <Form {...form}>
